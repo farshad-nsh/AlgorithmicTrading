@@ -1,0 +1,14 @@
+memory
+
+watch -n 5 free -m
+
+sudo apt-get install htop
+
+top
+
+free -m
+
+free -m | grep "Mem:"
+
+cat /proc/meminfo
+

@@ -1,0 +1,36 @@
+https://www.linode.com/docs/quick-answers/linux/start-service-at-boot/
+
+algoRunJavaFile.sh:
+#!/bin/bash
+echo "now running algotrader using shellscript---"
+cd /home/ubuntu
+java -jar simple-1.0-SNAPSHOT.jar > farshadAlgotraderLog.txt &
+
+---------------------------------------------
+chmod +x algoRunJavaFile.sh
+---------------------------------------------
+Create a Unit file to define a systemd service:
+inside /etc/systemd/system/algoTradingService.service :
+[Unit]
+#After=network.target auditd.service
+Description=systemd service to run java file at startup.
+[Service]
+#Type=simple
+WorkingDirectory=/home/ubuntu/
+ExecStart=/bin/bash algoRunJavaFile.sh start
+#Restart=always
+#RestartSec=60
+User=ubuntu
+Type=forking
+Restart=on-failure
+RestartSec=10
+[Install]
+WantedBy=multi-user.target
+---------------------------------------------
+cd /etc/systemd/system
+
+sudo chmod 644 /etc/systemd/system/algoTradingService.service
+sudo systemctl enable algoTradingService.service
+sudo systemctl start algoTradingService.service
+sudo systemctl restart algoTradingService.service
+

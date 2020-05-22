@@ -1,0 +1,62 @@
+list of services:
+systemctl list-unit-files | grep enabled
+
+list active services:
+systemctl list-units --type=service --state=active
+
+list running services
+systemctl list-units --type=service --state=running
+
+sudo service --status-all
+
+journalctl -u algoTradingService.service
+
+just put this file inside /etc/init.d
+algorunatstart
+
+#!/bin/bash
+
+echo "now running algotrader using shellscript---";
+
+ls
+
+java -jar /home/ubuntu/simple-1.0-SNAPSHOT.jar > farshadAlgotraderLog.txt &
+
+
+
+ubuntu@ubuntu-algo-rl:~$ cat algoRunJavaFile.sh
+#!/bin/bash
+echo "now running algotrader using shell script---"
+cd /home/ubuntu
+rm -rf csv/
+rm -rf farshadAlgotraderLog.txt
+rm -rf openFinDeskLogs/
+mkdir openFinDeskLogs
+java -Dlog4j.configuration=file:"./resources/log4j.properties" -jar algotrader-v2.x.x.jar > farshadAlgotraderLog.txt
+
+
+ubuntu@ubuntu-algo-rl:/etc/systemd/system$ sudo vi algoTradingService.service
+[Unit]
+#After=network.target auditd.service
+Description=systemd service to run java file at startup.
+[Service]
+#Type=oneshot
+WorkingDirectory=/home/ubuntu/
+ExecStart=/bin/bash algoRunJavaFile.sh start
+#Restart=always
+#RestartSec=60
+User=root
+#Type=forking
+Type=simple
+Restart=on-failure
+#RestartSec=10
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+and then:
+sudo systemctl enable algoTradingService.service
+sudo systemctl start algoTradingService.service
+sudo systemctl status algoTradingService.service

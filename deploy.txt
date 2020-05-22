@@ -1,0 +1,56 @@
+* copy files:
+/lib
+/csv
+simple-1.0-SNAPSHOT.jar
+
+cd desktop
+
+scp -r simple-1.0-SNAPSHOT.jar     lib/  csv/  ubuntu@37.152.185.41:/home/ubuntu
+scp -r simple-1.0-SNAPSHOT.jar    csv/  ubuntu@37.152.185.41:/home/ubuntu
+scp -r algotrader-v2.x.x.jar csv/ ubuntu@37.152.185.41:/home/ubuntu
+scp -r algotrader-v2.x.x.jar lib/  ubuntu@37.152.185.41:/home/ubuntu
+scp -r algotrader-v2.x.x.jar  ubuntu@37.152.185.41:/home/ubuntu
+
+scp -r algotrader-v2.x.x.jar  ubuntu@37.152.185.41:/home/ubuntu
+
+
+scp -r algotrader-v2.x.x.jar lib/  root@79.175.151.248:/home/
+
+
+scp -r algotrader-v2.x.x.jar lib/  ubuntu@194.5.192.190:/home/ubuntu
+
+* then:
+
+
+install java: sudo apt-get install openjdk-8-jdk
+
+
+java -jar simple-1.0-SNAPSHOT.jar > farshadAlgotraderLog.txt &
+
+java -jar algotrader-v2.x.x.jar > farshadAlgotraderLog.txt
+
+java -Dlog4j.configuration=/resources/log4j.properties -jar algotrader-v2.x.x.jar
+
+java -Dlog4j.configuration=file://$currDir/cfg/log4j.properties -jar ./MyProject.jar
+
+java -Dlog4j.configuration=file:/home/myapp/config/log4j.properties com.foobar.myapp
+java -Dlog4j.configuration=file:".\log4j.properties" -jar com.your-1.0-SNAPSHOT.jar
+
+# intellij
+-Dlog4j.configuration=log4j.properties
+# inside linux server .sh file
+java -Dlog4j.configuration=file:"./resources/log4j.properties" -jar  algotrader-v2.x.x.jar
+
+
+ubuntu@ubuntu-algo-rl:~$ cat algoRunJavaFile.sh
+#!/bin/bash
+echo "now running algotrader using shell script---"
+cd /home/ubuntu
+rm -rf csv/
+rm -rf farshadAlgotraderLog.txt
+rm -rf openFinDeskLogs/
+mkdir openFinDeskLogs
+java -Dlog4j.configuration=file:"./resources/log4j.properties" -jar algotrader-v2.x.x.jar > farshadAlgotraderLog.txt
+
+
+java -jar restUsingWebflux-1.x.x.jar &

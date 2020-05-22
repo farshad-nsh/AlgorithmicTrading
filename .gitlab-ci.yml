@@ -1,0 +1,15 @@
+---
+stages:
+  - deployStage
+
+build:
+  stage: deployStage
+  tags:
+    - myshell
+
+  script:
+      - echo "algotrader"
+      - chmod 777 continuousDeployment.sh
+      - ./continuousDeployment.sh
+
+...
