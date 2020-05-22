@@ -4,7 +4,7 @@ This is an opensource Java framework to implement any technical trading strategy
 by using openFinDesk annotations.
 OpenFinDesk has many modules. Current module which is based on technical analysis is opensource.
 
-#pros
+# pros
 * loose coupling and Java SOLID principles are considered as much as possible.
 * can be scaled horizontally and vertically
 * using influxdb,csv or any other store you like.
@@ -16,7 +16,7 @@ OpenFinDesk has many modules. Current module which is based on technical analysi
 * separate money management 
 * separate position management
 * using any approach such as Fibonacci, indicators or a combination of many strategies
-#cons
+# cons
 * It is only technical analysis.
 * It is not based on a reactive architecture like RxJava.
 * refactoring is not perfect.
